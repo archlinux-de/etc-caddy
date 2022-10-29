@@ -1,0 +1,60 @@
+archlinux.de {
+	import openpgpkey
+	redir https://www.{host}{uri}
+}
+
+www.archlinux.de {
+	import tls
+	import hsts
+
+	header {
+		Content-Security-Policy "default-src 'self'; img-src 'self' data:; form-action 'self'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests;"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "same-origin"
+	}
+
+	@legacy {
+		path /
+		method GET
+		expression `{query}.contains("page=")`
+	}
+	handle @legacy {
+		root * /srv/http/vhosts/www.archlinux.de/api/public
+		encode gzip
+		php_fastcgi unix//run/php-fpm/www.socket
+	}
+
+	@backend path /api/* /download/* /news/feed /packages/feed /releases/feed /packages/opensearch /packages/suggest /sitemap.xml
+	handle @backend {
+		root * /srv/http/vhosts/www.archlinux.de/api/public
+		encode gzip
+		php_fastcgi unix//run/php-fpm/www.socket
+	}
+
+	handle /* {
+		root * /srv/http/vhosts/www.archlinux.de/app/dist
+		try_files {path} {path}/ /index.html
+		file_server {
+			hide .*
+			precompressed br gzip
+		}
+		header Cache-Control max-age=600
+	}
+
+	@assets {
+		path /img/* /css/* /js/*
+	}
+	header @assets {
+		header Cache-Control max-age=31536000
+	}
+
+	redir /statistics https://pkgstats.archlinux.de/ permanent
+	redir /statistics/* https://pkgstats.archlinux.de{uri} permanent
+
+	import favicon
+
+	@php {
+		path *.php
+	}
+	respond @php 404
+}

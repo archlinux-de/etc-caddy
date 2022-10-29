@@ -1,0 +1,8 @@
+*~
+*.pacnew
+*.pacsave
+/auth.d/*
+!/auth.d/.gitkeep
+/root/.well-known/openpgpkey/hu/*
+!/root/.well-known/openpgpkey/hu/.gitkeep
+/.idea

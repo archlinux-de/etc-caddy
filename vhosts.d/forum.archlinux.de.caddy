@@ -1,0 +1,3 @@
+forum.archlinux.de {
+	respond * 503
+}

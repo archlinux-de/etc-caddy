@@ -1,0 +1,5 @@
+(tls) {
+	tls {
+		protocols tls1.3
+	}
+}

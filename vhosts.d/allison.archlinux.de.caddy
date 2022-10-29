@@ -1,0 +1,3 @@
+allison.archlinux.de {
+	respond * 503
+}

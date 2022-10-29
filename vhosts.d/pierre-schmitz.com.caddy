@@ -1,0 +1,8 @@
+www.pierre-schmitz.com {
+	redir https://pierre-schmitz.com{uri}
+}
+
+pierre-schmitz.com {
+	import openpgpkey
+	respond * 503
+}

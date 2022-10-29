@@ -1,0 +1,8 @@
+(favicon) {
+	handle_path /favicon.ico {
+		file_server * {
+			root /etc/caddy/root
+		}
+		header Cache-Control max-age=3024000
+	}
+}

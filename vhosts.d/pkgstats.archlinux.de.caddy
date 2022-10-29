@@ -1,0 +1,3 @@
+pkgstats.archlinux.de {
+	respond * 503
+}

@@ -1,0 +1,3 @@
+planet.archlinux.de {
+	respond * 503
+}

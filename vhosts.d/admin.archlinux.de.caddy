@@ -1,0 +1,3 @@
+admin.archlinux.de {
+	respond * 503
+}

@@ -1,0 +1,3 @@
+projects.pierre-schmitz.com {
+	respond * 503
+}

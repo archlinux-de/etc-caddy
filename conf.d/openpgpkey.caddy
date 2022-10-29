@@ -1,0 +1,9 @@
+(openpgpkey) {
+	handle /.well-known/openpgpkey/* {
+		header Access-Control-Allow-Origin "*"
+		file_server {
+			root /etc/caddy/root
+		}
+	}
+	error /.well-known/openpgpkey/404 "" 404
+}
